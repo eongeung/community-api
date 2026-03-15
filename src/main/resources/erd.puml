@@ -1,0 +1,46 @@
+@startuml
+entity "users" {
+    * id : UUID <<PK>>
+    --
+    * email : VARCHAR(255)
+    * password : VARCHAR(255)
+    * nickname : VARCHAR(50)
+    created_at : TIMESTAMP
+}
+
+entity "posts" {
+    * id : UUID <<PK>>
+    --
+    * user_id : UUID <<FK>>
+    * title : VARCHAR(200)
+    * content : TEXT
+    is_anonymous : BOOLEAN
+    like_count : INT
+    created_at : TIMESTAMP
+    updated_at : TIMESTAMP
+}
+
+entity "comments" {
+    * id : UUID <<PK>>
+    --
+    * post_id : UUID <<FK>>
+    * user_id : UUID <<FK>>
+    parent_id : UUID <<FK>>
+    * content : TEXT
+    is_anonymous : BOOLEAN
+    created_at : TIMESTAMP
+}
+
+entity "likes" {
+    * user_id : UUID <<FK>>
+    * post_id : UUID <<FK>>
+}
+
+users ||--o{ posts : "작성"
+users ||--o{ comments : "작성"
+users ||--o{ likes : "좋아요"
+posts ||--o{ comments : "포함"
+posts ||--o{ likes : "받음"
+comments ||--o{ comments : "대댓글"
+
+@enduml

@@ -28,6 +28,12 @@ public class User {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
+    public User(String email, String password, String nickname) {
+        this.email = email;
+        this.password = password;
+        this.nickname = nickname;
+    }
+
     @PrePersist
     public void prePersist() {
         this.createdAt = LocalDateTime.now();
