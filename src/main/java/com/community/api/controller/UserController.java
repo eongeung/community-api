@@ -1,5 +1,7 @@
 package com.community.api.controller;
 
+import com.community.api.dto.LoginRequest;
+import com.community.api.dto.LoginResponse;
 import com.community.api.dto.SignupRequest;
 import com.community.api.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -17,5 +19,10 @@ public class UserController {
     public ResponseEntity<String> signup(@RequestBody SignupRequest request) {
         userService.signup(request);
         return ResponseEntity.ok("회원가입 성공!");
+    }
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponse> login(@RequestBody
+                                                   LoginRequest request) {
+        return ResponseEntity.ok(userService.login(request));
     }
 }
