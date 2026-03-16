@@ -38,4 +38,20 @@ public class PostController {
     public ResponseEntity<PostResponse> getPost(@PathVariable UUID id) {
         return ResponseEntity.ok(postService.getPost(id));
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<PostResponse> updatePost(
+            @PathVariable UUID id,
+            @AuthenticationPrincipal String email,
+            @RequestBody PostRequest request) {
+        return ResponseEntity.ok(postService.updatePost(id, email, request));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletePost(
+            @PathVariable UUID id,
+            @AuthenticationPrincipal String email) {
+        postService.deletePost(id, email);
+        return ResponseEntity.noContent().build();
+    }
 }

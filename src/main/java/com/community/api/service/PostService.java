@@ -11,6 +11,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class PostService {
@@ -37,5 +39,28 @@ public class PostService {
         Post post = postRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("게시글을 찾을 수 없습니다."));
         return new PostResponse(post);
+    }
+
+    public PostResponse updatePost(UUID id, String email, PostRequest request) {
+        Post post = postRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("게시글을 찾을 수 없습니다."));
+
+        if (!post.getUser().getEmail().equals(email)) {
+            throw new IllegalArgumentException("수정 권한이 없습니다.");
+        }
+
+        post.update(request.getTitle(), request.getContent());
+        return new PostResponse(post);
+    }
+
+    public void deletePost(UUID id, String email) {
+        Post post = postRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("게시글을 찾을 수 없습니다."));
+
+        if (!post.getUser().getEmail().equals(email)) {
+            throw new IllegalArgumentException("삭제 권한이 없습니다.");
+        }
+
+        postRepository.delete(post);
     }
 }
