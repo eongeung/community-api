@@ -60,4 +60,12 @@ public class Post {
         this.title = title;
         this.content = content;
     }
+
+    public void increaseLikeCount() {
+        this.likeCount++;
+    }
+
+    public void decreaseLikeCount() {
+        this.likeCount--;
+    }
 }
