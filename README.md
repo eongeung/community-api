@@ -8,8 +8,11 @@
 ## ☁️ Architecture
 ```
 Client → nginx (80) → Spring Boot (8080) → RDS (PostgreSQL)
-→ S3 (이미지)
+                                         → S3 (이미지)
 ```
+
+## 📖 API 문서
+http://13.63.155.144/swagger-ui/index.html
 
 ## 📌 API
 | Method | URL | Description |
@@ -30,4 +33,3 @@ cp src/main/resources/application.properties.example src/main/resources/applicat
 
 ## 👤 Author
 GitHub: [@eongeung](https://github.com/eongeung)
-
