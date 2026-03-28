@@ -1,5 +1,4 @@
-# 🏘️ Community API
-
+# 🏘️ Frankly
 > 눈치 보지 않고 진짜 이야기를 꺼낼 수 있는 익명 커뮤니티 REST API
 
 ## 🛠️ Tech Stack
